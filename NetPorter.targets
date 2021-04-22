@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--
+   ! Creates @(VersionSuffix) from git describe, based on most recent v* tag
+   ! Copyright (c) datadiode
+   ! SPDX-License-Identifier: MIT
+   !-->
+  <Target Name="GitDescribe" BeforeTargets="BeforeBuild">
+    <Exec Command="for /f &quot;tokens=1,* delims=-&quot; %%a in ('&quot;git describe --long --tags --match v*&quot;') do echo -%%b > $(ProjectName).version_suffix" />
+    <ReadLinesFromFile File="$(ProjectName).version_suffix">
+      <Output TaskParameter="Lines" ItemName="VersionSuffix" />
+    </ReadLinesFromFile>
+  </Target> 
+</Project>

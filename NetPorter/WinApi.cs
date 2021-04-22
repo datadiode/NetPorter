@@ -77,5 +77,23 @@ namespace Unclassified
 
 		[DllImport("shell32.dll", CharSet = CharSet.Auto)]
 		public static extern IntPtr SHGetFileInfo(string pszPath, uint dwFileAttributes, out SHFILEINFO psfi, uint cbFileInfo, SHGFI uFlags);
+
+		[DllImport("kernel32.dll", SetLastError = true)]
+		public static extern bool AttachConsole(int dwProcessId);
+
+		[DllImport("kernel32.dll")]
+		public static extern bool SetConsoleTitle(string lpConsoleTitle);
+
+		[DllImport("kernel32.dll")]
+		public static extern bool GenerateConsoleCtrlEvent(uint dwCtrlEvent, int dwProcessGroupId);
+
+		[DllImport("kernel32.dll")]
+		public static extern bool FreeConsole();
+
+		[DllImport("kernel32.dll")]
+		public static extern IntPtr GetConsoleWindow();
+
+		[DllImport("user32.dll")]
+		public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 	}
 }

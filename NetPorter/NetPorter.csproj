@@ -1,17 +1,24 @@
-﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.50727</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
+    <VersionPrefix>1.1.1</VersionPrefix>
+    <Version Condition=" '$(Configuration)' == 'Release' ">$(VersionPrefix)@(VersionSuffix)</Version>
+    <Version Condition=" '$(Configuration)' != 'Release' ">$(VersionPrefix)@(VersionSuffix)-$(Configuration)</Version>
+    <AssemblyVersion>1.1.1.0</AssemblyVersion>
+    <FileVersion>1.1.1.0</FileVersion>
+    <Company>Yves Goergen</Company>
+    <Copyright>Copyright © Yves Goergen 2005-7</Copyright>
     <ProjectGuid>{CBD2F9A5-772A-400A-BC5C-8BDB015C8DA6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NetPorter</RootNamespace>
     <AssemblyName>NetPorter</AssemblyName>
+    <AssemblyTitle>NetPorter</AssemblyTitle>
+    <Description>Simple TCP port forwarding application</Description>
+    <TargetFramework>net40</TargetFramework>
+    <FileAlignment>512</FileAlignment>
     <ApplicationIcon>NetPorter_appl.ico</ApplicationIcon>
-    <Win32Resource>
-    </Win32Resource>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -51,7 +58,6 @@
     <Compile Include="PortMapClient.cs" />
     <Compile Include="PortMapListener.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -64,6 +70,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -74,7 +81,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="UpdateCheck.cs" />
     <Compile Include="WinApi.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -83,7 +89,10 @@
     <None Include="NetPorter_full.ico" />
     <None Include="NetPorter_tray.ico" />
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <PackageReference Include="FCTB" Version="2.16.24" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)$(SolutionName).targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

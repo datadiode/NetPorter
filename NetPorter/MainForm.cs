@@ -13,36 +13,76 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using Unclassified;
+using System.Diagnostics;
 
 namespace NetPorter
 {
 	public partial class MainForm : Form
 	{
 		bool displayedTrayNote = false;
+		Process dualserver = null;
 
 		public MainForm()
 		{
 			InitializeComponent();
+
+			labelVersion.Text += ProductVersion;
 
 			WinApi.SHFILEINFO fi;
 			WinApi.SHGetFileInfo(Application.ExecutablePath, 0, out fi, (uint) Marshal.SizeOf(typeof(WinApi.SHFILEINFO)), WinApi.SHGFI.Icon);
 			Icon = Icon.FromHandle(fi.hIcon);
 
 			LoadConfig();
+
+			StartDualServer();
+		}
+
+		void StartDualServer()
+		{
+			try
+			{
+				string filename = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DualServer.exe");
+				ProcessStartInfo startInfo = new ProcessStartInfo(filename);
+				startInfo.WindowStyle = ProcessWindowStyle.Minimized;
+				dualserver = Process.Start(startInfo);
+				while (!WinApi.AttachConsole(dualserver.Id))
+				{
+					Thread.Sleep(100);
+				}
+				WinApi.SetConsoleTitle("Dual Server");
+			}
+			catch
+			{
+			}
+		}
+
+		protected override void OnClosed(EventArgs e)
+		{
+			base.OnClosed(e);
+			WinApi.GenerateConsoleCtrlEvent(1, 0);
+		}
+
+		protected override void OnShown(EventArgs e)
+		{
+			base.OnShown(e);
+			webBrowser1.Navigate("http://127.0.0.1:6789");
 		}
 
 		private void MainForm_LocationChanged(object sender, EventArgs e)
 		{
+			var hwndConsole = WinApi.GetConsoleWindow();
 			if (WindowState == FormWindowState.Minimized)
 			{
 				NotifyIcon.Visible = true;
 				Visible = false;
+				WinApi.ShowWindow(hwndConsole, 0);
 				if (!displayedTrayNote)
 					NotifyIcon.ShowBalloonTip(5000);
 				displayedTrayNote = true;
 			}
 			else
 			{
+				WinApi.ShowWindow(hwndConsole, 7);
 				Visible = true;
 				NotifyIcon.Visible = false;
 			}
@@ -265,7 +305,68 @@ namespace NetPorter
 
 		private void HomepageLinklabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
-			UpdateCheck.Check("http://beta.unclassified.de/projekte/netporter/update.xml");
+			Process.Start("https://github.com/datadiode/NetPorter/releases");
+		}
+
+		private void radioButton1_CheckedChanged(object sender, EventArgs e)
+		{
+			webBrowser1.Visible = radioButton1.Checked;
+			button1.Enabled = radioButton1.Checked;
+		}
+
+		private void radioButton2_CheckedChanged(object sender, EventArgs e)
+		{
+			textBox1.Visible = radioButton2.Checked;
+			button2.Enabled = radioButton2.Checked;
+			if (textBox1.Visible)
+			{
+				try
+				{
+					string filename = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DualServer.ini");
+					textBox1.Text = File.ReadAllText(filename);
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(ex.Message,
+						"Error reading DualServer.ini",
+						MessageBoxButtons.OK,
+						MessageBoxIcon.Error);
+				}
+			}
+		}
+
+		private void button1_Click(object sender, EventArgs e)
+		{
+			webBrowser1.Refresh();
+		}
+
+		private void button2_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				string filename = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DualServer.ini");
+				File.WriteAllText(filename, textBox1.Text);
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message,
+					"Error writing DualServer.ini",
+					MessageBoxButtons.OK,
+					MessageBoxIcon.Error);
+			}
+		}
+
+		private void button3_Click(object sender, EventArgs e)
+		{
+			if (dualserver != null)
+			{
+				WinApi.FreeConsole();
+				dualserver.CloseMainWindow();
+				dualserver.WaitForExit();
+				dualserver.Dispose();
+				dualserver = null;
+				StartDualServer();
+			}
 		}
 	}
 }

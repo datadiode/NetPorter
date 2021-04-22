@@ -1,0 +1,18 @@
+version: 1.0.{build}
+image: Visual Studio 2017
+
+configuration:
+- Debug
+- Release
+
+platform: Any CPU
+
+build_script:
+- msbuild /t:Restore,Rebuild /p:Platform="%PLATFORM%" /p:Configuration="%CONFIGURATION%" NetPorter.sln
+
+after_build:
+- ps: $env:PRODUCT_VERSION=(Get-Command "$env:APPVEYOR_BUILD_FOLDER\NetPorter\bin\$env:CONFIGURATION\net40\NetPorter.exe").FileVersionInfo.ProductVersion
+
+artifacts:
+- path: NetPorter\bin\$(configuration)\net40
+  name: $(APPVEYOR_PROJECT_NAME)_$(PRODUCT_VERSION)-$(configuration)
