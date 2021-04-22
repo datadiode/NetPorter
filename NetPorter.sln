@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetPorter", "NetPorter\NetPorter.csproj", "{CBD2F9A5-772A-400A-BC5C-8BDB015C8DA6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CBD2F9A5-772A-400A-BC5C-8BDB015C8DA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBD2F9A5-772A-400A-BC5C-8BDB015C8DA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBD2F9A5-772A-400A-BC5C-8BDB015C8DA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBD2F9A5-772A-400A-BC5C-8BDB015C8DA6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
