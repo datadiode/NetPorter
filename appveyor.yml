@@ -15,4 +15,4 @@ after_build:
 
 artifacts:
 - path: NetPorter\bin\$(configuration)\net40
-  name: $(APPVEYOR_PROJECT_NAME)_$(PRODUCT_VERSION)-$(configuration)
+  name: $(APPVEYOR_PROJECT_NAME)_$(PRODUCT_VERSION)
