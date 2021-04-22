@@ -242,9 +242,15 @@ namespace NetPorter
 
 		private void StartPortmap(MappingPreset preset)
 		{
+			IPAddress address = null;
+			if (!IPAddress.TryParse(preset.DestinationHost, out address))
+			{
+				var hostent = Dns.GetHostEntry(preset.DestinationHost);
+				address = hostent.AddressList[0];
+			}
 			preset.Listener = new PortMapListener(IPAddress.Any,
 				preset.ListenPort,
-				new IPEndPoint(Dns.GetHostEntry(preset.DestinationHost).AddressList[0], preset.DestinationPort));
+				new IPEndPoint(address, preset.DestinationPort));
 			preset.Listener.Start();
 			preset.Enabled = true;
 		}
