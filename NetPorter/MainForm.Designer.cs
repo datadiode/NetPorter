@@ -236,7 +236,7 @@ namespace NetPorter
 			this.label8.Name = "label8";
 			this.label8.Size = new System.Drawing.Size(124, 13);
 			this.label8.TabIndex = 5;
-			this.label8.Text = "© 2005-7 Yves Goergen";
+			this.label8.Text = "© 2005-2021 Yves Goergen et al.";
 			this.label8.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
 			// groupBox1

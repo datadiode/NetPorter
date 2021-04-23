@@ -7,7 +7,7 @@
     <AssemblyVersion>1.1.1.0</AssemblyVersion>
     <FileVersion>1.1.1.0</FileVersion>
     <Company>Yves Goergen</Company>
-    <Copyright>Copyright © Yves Goergen 2005-7</Copyright>
+    <Copyright>Copyright © Yves Goergen et al. 2005-2021</Copyright>
     <ProjectGuid>{CBD2F9A5-772A-400A-BC5C-8BDB015C8DA6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>NetPorter</RootNamespace>

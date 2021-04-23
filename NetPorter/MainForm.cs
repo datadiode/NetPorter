@@ -8,12 +8,13 @@ using System.IO;
 using System.Net;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using Unclassified;
 using System.Diagnostics;
+using System.Reflection;
 
 namespace NetPorter
 {
@@ -27,6 +28,25 @@ namespace NetPorter
 			InitializeComponent();
 
 			labelVersion.Text += ProductVersion;
+
+			textBox1.ContextMenu = new ContextMenu(new MenuItem[] {
+				new MenuItem("SERVICES", textBox1_ContextMenuCommand),
+				new MenuItem("LISTEN_ON", textBox1_ContextMenuCommand),
+				new MenuItem("LOGGING", textBox1_ContextMenuCommand),
+				new MenuItem("DNS_ALLOWED_HOSTS", textBox1_ContextMenuCommand),
+				new MenuItem("DOMAIN_NAME", textBox1_ContextMenuCommand),
+				new MenuItem("DNS_HOSTS", textBox1_ContextMenuCommand),
+				new MenuItem("ALIASES", textBox1_ContextMenuCommand),
+				new MenuItem("WILD_HOSTS", textBox1_ContextMenuCommand),
+				new MenuItem("MAIL_SERVERS", textBox1_ContextMenuCommand),
+				new MenuItem("CONDITIONAL_FORWARDERS", textBox1_ContextMenuCommand),
+				new MenuItem("FORWARDING_SERVERS", textBox1_ContextMenuCommand),
+				new MenuItem("ZONE_REPLICATION", textBox1_ContextMenuCommand),
+				new MenuItem("TIMINGS", textBox1_ContextMenuCommand),
+				new MenuItem("HTTP_INTERFACE", textBox1_ContextMenuCommand),
+				new MenuItem("RANGE_SET", textBox1_ContextMenuCommand),
+				new MenuItem("GLOBAL_OPTIONS", textBox1_ContextMenuCommand),
+				});
 
 			WinApi.SHFILEINFO fi;
 			WinApi.SHGetFileInfo(Application.ExecutablePath, 0, out fi, (uint) Marshal.SizeOf(typeof(WinApi.SHFILEINFO)), WinApi.SHGFI.Icon);
@@ -122,7 +142,7 @@ namespace NetPorter
 				ListenPort.Enabled = true;
 				DestinationHost.Enabled = true;
 				DestinationPort.Enabled = true;
-				
+
 				RemovePreset.Enabled = true;
 			}
 			else
@@ -136,7 +156,7 @@ namespace NetPorter
 				ListenPort.Enabled = false;
 				DestinationHost.Enabled = false;
 				DestinationPort.Enabled = false;
-				
+
 				RemovePreset.Enabled = false;
 			}
 		}
@@ -372,6 +392,17 @@ namespace NetPorter
 				dualserver.Dispose();
 				dualserver = null;
 				StartDualServer();
+			}
+		}
+
+		private void textBox1_ContextMenuCommand(object sender, EventArgs e)
+		{
+			var item = sender as MenuItem;
+			var pattern = "^\\[" + item.Text + "\\]";
+			foreach (var line in textBox1.FindLines(pattern, RegexOptions.Singleline))
+			{
+				textBox1.Navigate(line);
+				break;
 			}
 		}
 	}
