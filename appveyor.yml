@@ -15,6 +15,7 @@ after_build:
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;
     Invoke-WebRequest https://github.com/datadiode/dualserver/releases/download/7.11.16.datadiode.23.g7bc52/DualServer_7.11.16.datadiode.23.g7bc52-Win32-$env:CONFIGURATION.zip -Outfile DualServer.zip;
     7z.exe x "-oNetPorter\bin\$env:CONFIGURATION\net40\" DualServer.zip;
+    copy LICENSE "NetPorter\bin\$env:CONFIGURATION\net40\";
     $env:PRODUCT_VERSION=(Get-Command "$env:APPVEYOR_BUILD_FOLDER\NetPorter\bin\$env:CONFIGURATION\net40\NetPorter.exe").FileVersionInfo.ProductVersion;
 
 artifacts:
