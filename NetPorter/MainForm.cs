@@ -36,7 +36,7 @@ namespace NetPorter
 
 			Height -= webBrowser1.Height;
 
-			labelVersion.Text += ProductVersion;
+			HomepageLinklabel.Text += ProductVersion;
 
 			textBox1.AutoIndent = false;
 			textBox1.TextChanged += text1_OnTextChanged;
@@ -488,6 +488,14 @@ namespace NetPorter
 					MessageBoxButtons.OK,
 					MessageBoxIcon.Error);
 			}
+		}
+
+		private void DualServerManualLinklabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			var pdf = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DualServerManual.pdf");
+			if (!File.Exists(pdf))
+				pdf = "https://scripttiger.github.io/dualserver/DualServerManual.pdf";
+			Process.Start(pdf);
 		}
 	}
 }

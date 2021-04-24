@@ -43,7 +43,6 @@ namespace NetPorter
 			this.label6 = new System.Windows.Forms.Label();
 			this.PresetName = new System.Windows.Forms.TextBox();
 			this.label7 = new System.Windows.Forms.Label();
-			this.HomepageLinklabel = new System.Windows.Forms.LinkLabel();
 			this.label8 = new System.Windows.Forms.Label();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.NotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
@@ -54,10 +53,11 @@ namespace NetPorter
 			this.button1 = new System.Windows.Forms.Button();
 			this.button2 = new System.Windows.Forms.Button();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
+			this.DualServerManualLinklabel = new System.Windows.Forms.LinkLabel();
 			this.checkBox1 = new System.Windows.Forms.CheckBox();
 			this.button4 = new System.Windows.Forms.Button();
 			this.button3 = new System.Windows.Forms.Button();
-			this.labelVersion = new System.Windows.Forms.Label();
+			this.HomepageLinklabel = new System.Windows.Forms.LinkLabel();
 			((System.ComponentModel.ISupportInitialize)(this.ListenPort)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.DestinationPort)).BeginInit();
 			this.groupBox1.SuspendLayout();
@@ -218,19 +218,6 @@ namespace NetPorter
 			this.label7.TabIndex = 8;
 			this.label7.Text = "Check the preset in the list to activate the port mapping.";
 			// 
-			// HomepageLinklabel
-			// 
-			this.HomepageLinklabel.AutoSize = true;
-			this.HomepageLinklabel.Location = new System.Drawing.Point(528, 45);
-			this.HomepageLinklabel.Name = "HomepageLinklabel";
-			this.HomepageLinklabel.Size = new System.Drawing.Size(95, 13);
-			this.HomepageLinklabel.TabIndex = 7;
-			this.HomepageLinklabel.TabStop = true;
-			this.HomepageLinklabel.Text = "Check for updates";
-			this.HomepageLinklabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
-			this.HomepageLinklabel.VisitedLinkColor = System.Drawing.Color.Blue;
-			this.HomepageLinklabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.HomepageLinklabel_LinkClicked);
-			// 
 			// label8
 			// 
 			this.label8.AutoSize = true;
@@ -281,7 +268,7 @@ namespace NetPorter
 			this.radioButton1.AutoSize = true;
 			this.radioButton1.Checked = true;
 			this.radioButton1.Enabled = false;
-			this.radioButton1.Location = new System.Drawing.Point(6, 19);
+			this.radioButton1.Location = new System.Drawing.Point(6, 25);
 			this.radioButton1.Name = "radioButton1";
 			this.radioButton1.Size = new System.Drawing.Size(56, 17);
 			this.radioButton1.TabIndex = 1;
@@ -294,7 +281,7 @@ namespace NetPorter
 			// 
 			this.radioButton2.AutoSize = true;
 			this.radioButton2.Enabled = false;
-			this.radioButton2.Location = new System.Drawing.Point(6, 47);
+			this.radioButton2.Location = new System.Drawing.Point(6, 53);
 			this.radioButton2.Name = "radioButton2";
 			this.radioButton2.Size = new System.Drawing.Size(92, 17);
 			this.radioButton2.TabIndex = 2;
@@ -339,7 +326,7 @@ namespace NetPorter
 			// button1
 			// 
 			this.button1.Enabled = false;
-			this.button1.Location = new System.Drawing.Point(98, 15);
+			this.button1.Location = new System.Drawing.Point(98, 21);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(69, 23);
 			this.button1.TabIndex = 3;
@@ -350,7 +337,7 @@ namespace NetPorter
 			// button2
 			// 
 			this.button2.Enabled = false;
-			this.button2.Location = new System.Drawing.Point(98, 44);
+			this.button2.Location = new System.Drawing.Point(98, 50);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(69, 23);
 			this.button2.TabIndex = 4;
@@ -360,6 +347,7 @@ namespace NetPorter
 			// 
 			// groupBox2
 			// 
+			this.groupBox2.Controls.Add(this.DualServerManualLinklabel);
 			this.groupBox2.Controls.Add(this.checkBox1);
 			this.groupBox2.Controls.Add(this.button4);
 			this.groupBox2.Controls.Add(this.button3);
@@ -367,11 +355,22 @@ namespace NetPorter
 			this.groupBox2.Controls.Add(this.radioButton1);
 			this.groupBox2.Controls.Add(this.button1);
 			this.groupBox2.Controls.Add(this.radioButton2);
-			this.groupBox2.Location = new System.Drawing.Point(525, 65);
+			this.groupBox2.Location = new System.Drawing.Point(525, 58);
 			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(173, 102);
+			this.groupBox2.Size = new System.Drawing.Size(173, 109);
 			this.groupBox2.TabIndex = 8;
 			this.groupBox2.TabStop = false;
+			// 
+			// DualServerManualLinklabel
+			// 
+			this.DualServerManualLinklabel.AutoSize = true;
+			this.DualServerManualLinklabel.Location = new System.Drawing.Point(123, 0);
+			this.DualServerManualLinklabel.Name = "DualServerManualLinklabel";
+			this.DualServerManualLinklabel.Size = new System.Drawing.Size(41, 13);
+			this.DualServerManualLinklabel.TabIndex = 7;
+			this.DualServerManualLinklabel.TabStop = true;
+			this.DualServerManualLinklabel.Text = "Manual";
+			this.DualServerManualLinklabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.DualServerManualLinklabel_LinkClicked);
 			// 
 			// checkBox1
 			// 
@@ -387,7 +386,7 @@ namespace NetPorter
 			// button4
 			// 
 			this.button4.Enabled = false;
-			this.button4.Location = new System.Drawing.Point(68, 73);
+			this.button4.Location = new System.Drawing.Point(68, 79);
 			this.button4.Name = "button4";
 			this.button4.Size = new System.Drawing.Size(99, 23);
 			this.button4.TabIndex = 6;
@@ -398,7 +397,7 @@ namespace NetPorter
 			// button3
 			// 
 			this.button3.Enabled = false;
-			this.button3.Location = new System.Drawing.Point(6, 73);
+			this.button3.Location = new System.Drawing.Point(6, 79);
 			this.button3.Name = "button3";
 			this.button3.Size = new System.Drawing.Size(56, 23);
 			this.button3.TabIndex = 5;
@@ -406,27 +405,28 @@ namespace NetPorter
 			this.button3.UseVisualStyleBackColor = true;
 			this.button3.Click += new System.EventHandler(this.button3_Click);
 			// 
-			// labelVersion
+			// HomepageLinklabel
 			// 
-			this.labelVersion.AutoSize = true;
-			this.labelVersion.Location = new System.Drawing.Point(528, 9);
-			this.labelVersion.Name = "labelVersion";
-			this.labelVersion.Size = new System.Drawing.Size(13, 13);
-			this.labelVersion.TabIndex = 5;
-			this.labelVersion.Text = "v";
+			this.HomepageLinklabel.AutoSize = true;
+			this.HomepageLinklabel.Location = new System.Drawing.Point(528, 9);
+			this.HomepageLinklabel.Name = "HomepageLinklabel";
+			this.HomepageLinklabel.Size = new System.Drawing.Size(13, 13);
+			this.HomepageLinklabel.TabIndex = 5;
+			this.HomepageLinklabel.TabStop = true;
+			this.HomepageLinklabel.Text = "v";
+			this.HomepageLinklabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.HomepageLinklabel_LinkClicked);
 			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(701, 522);
-			this.Controls.Add(this.labelVersion);
+			this.Controls.Add(this.HomepageLinklabel);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.textBox1);
 			this.Controls.Add(this.webBrowser1);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.label8);
-			this.Controls.Add(this.HomepageLinklabel);
 			this.Controls.Add(this.RemovePreset);
 			this.Controls.Add(this.AddPreset);
 			this.Controls.Add(this.MappingPresets);
@@ -476,7 +476,7 @@ namespace NetPorter
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.GroupBox groupBox2;
 		private System.Windows.Forms.Button button3;
-		private System.Windows.Forms.Label labelVersion;
+		private System.Windows.Forms.LinkLabel DualServerManualLinklabel;
 		private System.Windows.Forms.Button button4;
 		private System.Windows.Forms.CheckBox checkBox1;
 	}
