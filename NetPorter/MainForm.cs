@@ -64,8 +64,6 @@ namespace NetPorter
 			WinApi.SHGetFileInfo(Application.ExecutablePath, 0, out fi, (uint)Marshal.SizeOf(typeof(WinApi.SHFILEINFO)), WinApi.SHGFI.Icon);
 			Icon = Icon.FromHandle(fi.hIcon);
 
-			LoadConfig();
-
 			try
 			{
 				var fileinfo = new FileInfo(DualServerINI);
@@ -74,6 +72,18 @@ namespace NetPorter
 			catch
 			{
 			}
+		}
+
+		protected override void OnShown(EventArgs e)
+		{
+			Update();
+			LoadConfig();
+		}
+
+		protected override void OnClosed(EventArgs e)
+		{
+			base.OnClosed(e);
+			WinApi.GenerateConsoleCtrlEvent(1, 0);
 		}
 
 		void StartDualServer()
@@ -106,12 +116,6 @@ namespace NetPorter
 			dualserver.WaitForExit();
 			dualserver.Dispose();
 			dualserver = null;
-		}
-
-		protected override void OnClosed(EventArgs e)
-		{
-			base.OnClosed(e);
-			WinApi.GenerateConsoleCtrlEvent(1, 0);
 		}
 
 		private void MainForm_LocationChanged(object sender, EventArgs e)
@@ -201,23 +205,20 @@ namespace NetPorter
 				}
 				catch (Exception ex)
 				{
-					MessageBox.Show(ex.Message,
-						"Error starting the port mapping",
-						MessageBoxButtons.OK,
-						MessageBoxIcon.Error);
-					e.NewValue = e.CurrentValue;
+					e.NewValue = CheckState.Indeterminate;
 				}
 				finally
 				{
 					Cursor = Cursors.Default;
 				}
 			}
-			else if (e.NewValue == CheckState.Unchecked)
+			else
 			{
 				try
 				{
 					Cursor = Cursors.WaitCursor;
 					EndPortmap(preset);
+					e.NewValue = CheckState.Unchecked;
 				}
 				catch
 				{
@@ -288,6 +289,7 @@ namespace NetPorter
 
 		private void StartPortmap(MappingPreset preset)
 		{
+			preset.Enabled = true;
 			IPAddress address = null;
 			if (!IPAddress.TryParse(preset.DestinationHost, out address))
 			{
@@ -298,14 +300,16 @@ namespace NetPorter
 				preset.ListenPort,
 				new IPEndPoint(address, preset.DestinationPort));
 			preset.Listener.Start();
-			preset.Enabled = true;
 		}
 
 		private void EndPortmap(MappingPreset preset)
 		{
-			preset.Listener.Dispose();
-			preset.Listener = null;
 			preset.Enabled = false;
+			if (preset.Listener != null)
+			{
+				preset.Listener.Dispose();
+				preset.Listener = null;
+			}
 		}
 
 		private void SaveConfig()
