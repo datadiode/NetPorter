@@ -54,6 +54,7 @@ namespace NetPorter
 			this.button1 = new System.Windows.Forms.Button();
 			this.button2 = new System.Windows.Forms.Button();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
+			this.checkBox1 = new System.Windows.Forms.CheckBox();
 			this.button4 = new System.Windows.Forms.Button();
 			this.button3 = new System.Windows.Forms.Button();
 			this.labelVersion = new System.Windows.Forms.Label();
@@ -223,7 +224,7 @@ namespace NetPorter
 			this.HomepageLinklabel.Location = new System.Drawing.Point(528, 45);
 			this.HomepageLinklabel.Name = "HomepageLinklabel";
 			this.HomepageLinklabel.Size = new System.Drawing.Size(95, 13);
-			this.HomepageLinklabel.TabIndex = 6;
+			this.HomepageLinklabel.TabIndex = 7;
 			this.HomepageLinklabel.TabStop = true;
 			this.HomepageLinklabel.Text = "Check for updates";
 			this.HomepageLinklabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -236,7 +237,7 @@ namespace NetPorter
 			this.label8.Location = new System.Drawing.Point(528, 27);
 			this.label8.Name = "label8";
 			this.label8.Size = new System.Drawing.Size(170, 13);
-			this.label8.TabIndex = 5;
+			this.label8.TabIndex = 6;
 			this.label8.Text = "© 2005-2021 Yves Goergen et al.";
 			this.label8.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
@@ -279,10 +280,11 @@ namespace NetPorter
 			// 
 			this.radioButton1.AutoSize = true;
 			this.radioButton1.Checked = true;
+			this.radioButton1.Enabled = false;
 			this.radioButton1.Location = new System.Drawing.Point(6, 19);
 			this.radioButton1.Name = "radioButton1";
 			this.radioButton1.Size = new System.Drawing.Size(56, 17);
-			this.radioButton1.TabIndex = 8;
+			this.radioButton1.TabIndex = 1;
 			this.radioButton1.TabStop = true;
 			this.radioButton1.Text = "Status";
 			this.radioButton1.UseVisualStyleBackColor = true;
@@ -291,10 +293,11 @@ namespace NetPorter
 			// radioButton2
 			// 
 			this.radioButton2.AutoSize = true;
+			this.radioButton2.Enabled = false;
 			this.radioButton2.Location = new System.Drawing.Point(6, 47);
 			this.radioButton2.Name = "radioButton2";
 			this.radioButton2.Size = new System.Drawing.Size(92, 17);
-			this.radioButton2.TabIndex = 9;
+			this.radioButton2.TabIndex = 2;
 			this.radioButton2.TabStop = true;
 			this.radioButton2.Text = "DualServer.ini";
 			this.radioButton2.UseVisualStyleBackColor = true;
@@ -319,6 +322,7 @@ namespace NetPorter
 			this.textBox1.CharWidth = 7;
 			this.textBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
 			this.textBox1.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+			this.textBox1.Enabled = false;
 			this.textBox1.Font = new System.Drawing.Font("Consolas", 9.75F);
 			this.textBox1.IsReplaceMode = false;
 			this.textBox1.Location = new System.Drawing.Point(1, 173);
@@ -327,17 +331,18 @@ namespace NetPorter
 			this.textBox1.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
 			this.textBox1.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("textBox1.ServiceColors")));
 			this.textBox1.Size = new System.Drawing.Size(702, 350);
-			this.textBox1.TabIndex = 10;
+			this.textBox1.TabIndex = 9;
 			this.textBox1.TabStop = false;
 			this.textBox1.Visible = false;
 			this.textBox1.Zoom = 100;
 			// 
 			// button1
 			// 
+			this.button1.Enabled = false;
 			this.button1.Location = new System.Drawing.Point(98, 15);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(69, 23);
-			this.button1.TabIndex = 11;
+			this.button1.TabIndex = 3;
 			this.button1.Text = "Refresh";
 			this.button1.UseVisualStyleBackColor = true;
 			this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -348,13 +353,14 @@ namespace NetPorter
 			this.button2.Location = new System.Drawing.Point(98, 44);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(69, 23);
-			this.button2.TabIndex = 12;
+			this.button2.TabIndex = 4;
 			this.button2.Text = "Save";
 			this.button2.UseVisualStyleBackColor = true;
 			this.button2.Click += new System.EventHandler(this.button2_Click);
 			// 
 			// groupBox2
 			// 
+			this.groupBox2.Controls.Add(this.checkBox1);
 			this.groupBox2.Controls.Add(this.button4);
 			this.groupBox2.Controls.Add(this.button3);
 			this.groupBox2.Controls.Add(this.button2);
@@ -364,26 +370,38 @@ namespace NetPorter
 			this.groupBox2.Location = new System.Drawing.Point(525, 65);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(173, 102);
-			this.groupBox2.TabIndex = 13;
+			this.groupBox2.TabIndex = 8;
 			this.groupBox2.TabStop = false;
-			this.groupBox2.Text = "Dual Server";
+			// 
+			// checkBox1
+			// 
+			this.checkBox1.AutoSize = true;
+			this.checkBox1.Location = new System.Drawing.Point(6, 0);
+			this.checkBox1.Name = "checkBox1";
+			this.checkBox1.Size = new System.Drawing.Size(82, 17);
+			this.checkBox1.TabIndex = 0;
+			this.checkBox1.Text = "Dual Server";
+			this.checkBox1.UseVisualStyleBackColor = true;
+			this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
 			// 
 			// button4
 			// 
+			this.button4.Enabled = false;
 			this.button4.Location = new System.Drawing.Point(68, 73);
 			this.button4.Name = "button4";
 			this.button4.Size = new System.Drawing.Size(99, 23);
-			this.button4.TabIndex = 14;
+			this.button4.TabIndex = 6;
 			this.button4.Text = "Save && Restart";
 			this.button4.UseVisualStyleBackColor = true;
 			this.button4.Click += new System.EventHandler(this.button4_Click);
 			// 
 			// button3
 			// 
+			this.button3.Enabled = false;
 			this.button3.Location = new System.Drawing.Point(6, 73);
 			this.button3.Name = "button3";
 			this.button3.Size = new System.Drawing.Size(56, 23);
-			this.button3.TabIndex = 13;
+			this.button3.TabIndex = 5;
 			this.button3.Text = "Restart";
 			this.button3.UseVisualStyleBackColor = true;
 			this.button3.Click += new System.EventHandler(this.button3_Click);
@@ -394,7 +412,7 @@ namespace NetPorter
 			this.labelVersion.Location = new System.Drawing.Point(528, 9);
 			this.labelVersion.Name = "labelVersion";
 			this.labelVersion.Size = new System.Drawing.Size(13, 13);
-			this.labelVersion.TabIndex = 14;
+			this.labelVersion.TabIndex = 5;
 			this.labelVersion.Text = "v";
 			// 
 			// MainForm
@@ -460,6 +478,7 @@ namespace NetPorter
 		private System.Windows.Forms.Button button3;
 		private System.Windows.Forms.Label labelVersion;
 		private System.Windows.Forms.Button button4;
+		private System.Windows.Forms.CheckBox checkBox1;
 	}
 }
 

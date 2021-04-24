@@ -24,13 +24,17 @@ namespace NetPorter
 		bool displayedTrayNote = false;
 		Process dualserver = null;
 
+		readonly string DualServerINI = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DualServer.ini");
+
 		readonly Regex CommentRegex = new Regex("\\#.*$", RegexOptions.Multiline);
-		readonly Regex DisabledRegex = new Regex("\\;.*$", RegexOptions.Multiline);
+		readonly Regex ExcludeRegex = new Regex("\\;.*$", RegexOptions.Multiline);
 		readonly Regex SectionRegex = new Regex("^\\[.*\\]", RegexOptions.Multiline);
 
 		public MainForm()
 		{
 			InitializeComponent();
+
+			Height -= webBrowser1.Height;
 
 			labelVersion.Text += ProductVersion;
 
@@ -57,16 +61,25 @@ namespace NetPorter
 				});
 
 			WinApi.SHFILEINFO fi;
-			WinApi.SHGetFileInfo(Application.ExecutablePath, 0, out fi, (uint) Marshal.SizeOf(typeof(WinApi.SHFILEINFO)), WinApi.SHGFI.Icon);
+			WinApi.SHGetFileInfo(Application.ExecutablePath, 0, out fi, (uint)Marshal.SizeOf(typeof(WinApi.SHFILEINFO)), WinApi.SHGFI.Icon);
 			Icon = Icon.FromHandle(fi.hIcon);
 
 			LoadConfig();
 
-			StartDualServer();
+			try
+			{
+				var fileinfo = new FileInfo(DualServerINI);
+				checkBox1.Checked = !fileinfo.IsReadOnly;
+			}
+			catch
+			{
+			}
 		}
 
 		void StartDualServer()
 		{
+			if (dualserver != null)
+				return;
 			try
 			{
 				string filename = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DualServer.exe");
@@ -84,16 +97,21 @@ namespace NetPorter
 			}
 		}
 
+		void StopDualServer()
+		{
+			if (dualserver == null)
+				return;
+			WinApi.FreeConsole();
+			dualserver.CloseMainWindow();
+			dualserver.WaitForExit();
+			dualserver.Dispose();
+			dualserver = null;
+		}
+
 		protected override void OnClosed(EventArgs e)
 		{
 			base.OnClosed(e);
 			WinApi.GenerateConsoleCtrlEvent(1, 0);
-		}
-
-		protected override void OnShown(EventArgs e)
-		{
-			base.OnShown(e);
-			webBrowser1.Navigate("http://127.0.0.1:6789");
 		}
 
 		private void MainForm_LocationChanged(object sender, EventArgs e)
@@ -348,7 +366,7 @@ namespace NetPorter
 			var sh = cr.tb.SyntaxHighlighter;
 			cr.ClearStyle(sh.GreenStyle, sh.GrayStyle, sh.BlueBoldStyle);
 			cr.SetStyle(sh.GreenStyle, CommentRegex);
-			cr.SetStyle(sh.GrayStyle, DisabledRegex);
+			cr.SetStyle(sh.GrayStyle, ExcludeRegex);
 			cr.SetStyle(sh.BlueBoldStyle, SectionRegex);
 			cr.ClearFoldingMarkers();
 			foreach (var sr in e.ChangedRange.GetRangesByLines(SectionRegex))
@@ -374,8 +392,7 @@ namespace NetPorter
 			{
 				try
 				{
-					string filename = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DualServer.ini");
-					textBox1.Text = File.ReadAllText(filename);
+					textBox1.Text = File.ReadAllText(DualServerINI);
 					textBox1.ClearUndo();
 				}
 				catch (Exception ex)
@@ -397,8 +414,7 @@ namespace NetPorter
 		{
 			try
 			{
-				string filename = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DualServer.ini");
-				File.WriteAllText(filename, textBox1.Text);
+				File.WriteAllText(DualServerINI, textBox1.Text);
 			}
 			catch (Exception ex)
 			{
@@ -411,15 +427,8 @@ namespace NetPorter
 
 		private void button3_Click(object sender, EventArgs e)
 		{
-			if (dualserver != null)
-			{
-				WinApi.FreeConsole();
-				dualserver.CloseMainWindow();
-				dualserver.WaitForExit();
-				dualserver.Dispose();
-				dualserver = null;
-				StartDualServer();
-			}
+			StopDualServer();
+			StartDualServer();
 		}
 
 		private void button4_Click(object sender, EventArgs e)
@@ -436,6 +445,44 @@ namespace NetPorter
 			{
 				textBox1.Navigate(line);
 				break;
+			}
+		}
+
+		private void checkBox1_CheckedChanged(object sender, EventArgs e)
+		{
+			var online = checkBox1.Checked;
+			radioButton1.Enabled = online;
+			radioButton2.Enabled = online;
+			button1.Enabled = online && radioButton1.Checked;
+			button2.Enabled = online && radioButton2.Checked;
+			button3.Enabled = online;
+			button4.Enabled = online && radioButton2.Checked;
+			textBox1.Enabled = online;
+			if (online)
+			{
+				if (Height < webBrowser1.Height)
+					Height += webBrowser1.Height;
+				StartDualServer();
+				webBrowser1.Navigate("http://127.0.0.1:6789");
+			}
+			else
+			{
+				if (Height > webBrowser1.Height)
+					Height -= webBrowser1.Height;
+				StopDualServer();
+				webBrowser1.Navigate("about:blank");
+			}
+			try
+			{
+				var fileinfo = new FileInfo(DualServerINI);
+				fileinfo.IsReadOnly = !online;
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message,
+					"Error changing DualServer.ini attributes",
+					MessageBoxButtons.OK,
+					MessageBoxIcon.Error);
 			}
 		}
 	}
