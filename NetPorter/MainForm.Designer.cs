@@ -68,7 +68,7 @@ namespace NetPorter
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(12, 13);
+			this.label1.Location = new System.Drawing.Point(9, 9);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(90, 13);
 			this.label1.TabIndex = 0;
@@ -161,7 +161,7 @@ namespace NetPorter
 			// MappingPresets
 			// 
 			this.MappingPresets.FormattingEnabled = true;
-			this.MappingPresets.Location = new System.Drawing.Point(12, 29);
+			this.MappingPresets.Location = new System.Drawing.Point(12, 27);
 			this.MappingPresets.Name = "MappingPresets";
 			this.MappingPresets.Size = new System.Drawing.Size(201, 109);
 			this.MappingPresets.TabIndex = 1;
@@ -170,7 +170,7 @@ namespace NetPorter
 			// 
 			// AddPreset
 			// 
-			this.AddPreset.Location = new System.Drawing.Point(12, 145);
+			this.AddPreset.Location = new System.Drawing.Point(12, 142);
 			this.AddPreset.Name = "AddPreset";
 			this.AddPreset.Size = new System.Drawing.Size(75, 23);
 			this.AddPreset.TabIndex = 2;
@@ -181,7 +181,7 @@ namespace NetPorter
 			// RemovePreset
 			// 
 			this.RemovePreset.Enabled = false;
-			this.RemovePreset.Location = new System.Drawing.Point(93, 145);
+			this.RemovePreset.Location = new System.Drawing.Point(93, 142);
 			this.RemovePreset.Name = "RemovePreset";
 			this.RemovePreset.Size = new System.Drawing.Size(120, 23);
 			this.RemovePreset.TabIndex = 3;
@@ -221,7 +221,7 @@ namespace NetPorter
 			// label8
 			// 
 			this.label8.AutoSize = true;
-			this.label8.Location = new System.Drawing.Point(528, 27);
+			this.label8.Location = new System.Drawing.Point(522, 27);
 			this.label8.Name = "label8";
 			this.label8.Size = new System.Drawing.Size(170, 13);
 			this.label8.TabIndex = 6;
@@ -239,9 +239,9 @@ namespace NetPorter
 			this.groupBox1.Controls.Add(this.DestinationHost);
 			this.groupBox1.Controls.Add(this.label5);
 			this.groupBox1.Controls.Add(this.DestinationPort);
-			this.groupBox1.Location = new System.Drawing.Point(222, 13);
+			this.groupBox1.Location = new System.Drawing.Point(219, 9);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(297, 155);
+			this.groupBox1.Size = new System.Drawing.Size(297, 156);
 			this.groupBox1.TabIndex = 4;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Mapping details:";
@@ -257,10 +257,10 @@ namespace NetPorter
 			// 
 			// webBrowser1
 			// 
-			this.webBrowser1.Location = new System.Drawing.Point(1, 174);
+			this.webBrowser1.Location = new System.Drawing.Point(1, 171);
 			this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
 			this.webBrowser1.Name = "webBrowser1";
-			this.webBrowser1.Size = new System.Drawing.Size(702, 349);
+			this.webBrowser1.Size = new System.Drawing.Size(700, 352);
 			this.webBrowser1.TabIndex = 7;
 			// 
 			// radioButton1
@@ -312,12 +312,12 @@ namespace NetPorter
 			this.textBox1.Enabled = false;
 			this.textBox1.Font = new System.Drawing.Font("Consolas", 9.75F);
 			this.textBox1.IsReplaceMode = false;
-			this.textBox1.Location = new System.Drawing.Point(1, 173);
+			this.textBox1.Location = new System.Drawing.Point(1, 171);
 			this.textBox1.Name = "textBox1";
 			this.textBox1.Paddings = new System.Windows.Forms.Padding(0);
 			this.textBox1.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
 			this.textBox1.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("textBox1.ServiceColors")));
-			this.textBox1.Size = new System.Drawing.Size(702, 350);
+			this.textBox1.Size = new System.Drawing.Size(700, 352);
 			this.textBox1.TabIndex = 9;
 			this.textBox1.TabStop = false;
 			this.textBox1.Visible = false;
@@ -355,7 +355,7 @@ namespace NetPorter
 			this.groupBox2.Controls.Add(this.radioButton1);
 			this.groupBox2.Controls.Add(this.button1);
 			this.groupBox2.Controls.Add(this.radioButton2);
-			this.groupBox2.Location = new System.Drawing.Point(525, 58);
+			this.groupBox2.Location = new System.Drawing.Point(522, 56);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(173, 109);
 			this.groupBox2.TabIndex = 8;
@@ -408,7 +408,7 @@ namespace NetPorter
 			// HomepageLinklabel
 			// 
 			this.HomepageLinklabel.AutoSize = true;
-			this.HomepageLinklabel.Location = new System.Drawing.Point(528, 9);
+			this.HomepageLinklabel.Location = new System.Drawing.Point(522, 9);
 			this.HomepageLinklabel.Name = "HomepageLinklabel";
 			this.HomepageLinklabel.Size = new System.Drawing.Size(13, 13);
 			this.HomepageLinklabel.TabIndex = 5;
