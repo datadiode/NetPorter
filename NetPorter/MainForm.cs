@@ -15,6 +15,7 @@ using System.Runtime.InteropServices;
 using Unclassified;
 using System.Diagnostics;
 using System.Reflection;
+using FastColoredTextBoxNS;
 
 namespace NetPorter
 {
@@ -23,11 +24,18 @@ namespace NetPorter
 		bool displayedTrayNote = false;
 		Process dualserver = null;
 
+		readonly Regex CommentRegex = new Regex("\\#.*$", RegexOptions.Multiline);
+		readonly Regex DisabledRegex = new Regex("\\;.*$", RegexOptions.Multiline);
+		readonly Regex SectionRegex = new Regex("^\\[.*\\]", RegexOptions.Multiline);
+
 		public MainForm()
 		{
 			InitializeComponent();
 
 			labelVersion.Text += ProductVersion;
+
+			textBox1.AutoIndent = false;
+			textBox1.TextChanged += text1_OnTextChanged;
 
 			textBox1.ContextMenu = new ContextMenu(new MenuItem[] {
 				new MenuItem("SERVICES", textBox1_ContextMenuCommand),
@@ -334,6 +342,23 @@ namespace NetPorter
 			Process.Start("https://github.com/datadiode/NetPorter/releases");
 		}
 
+		private void text1_OnTextChanged(object sender, TextChangedEventArgs e)
+		{
+			var cr = e.ChangedRange;
+			var sh = cr.tb.SyntaxHighlighter;
+			cr.ClearStyle(sh.GreenStyle, sh.GrayStyle, sh.BlueBoldStyle);
+			cr.SetStyle(sh.GreenStyle, CommentRegex);
+			cr.SetStyle(sh.GrayStyle, DisabledRegex);
+			cr.SetStyle(sh.BlueBoldStyle, SectionRegex);
+			cr.ClearFoldingMarkers();
+			foreach (var sr in e.ChangedRange.GetRangesByLines(SectionRegex))
+			{
+				if (sr.Start.iLine > 0)
+					sr.tb[sr.Start.iLine - 1].FoldingEndMarker = "section";
+				sr.tb[sr.Start.iLine].FoldingStartMarker = "section";
+			}
+		}
+
 		private void radioButton1_CheckedChanged(object sender, EventArgs e)
 		{
 			webBrowser1.Visible = radioButton1.Checked;
@@ -344,12 +369,14 @@ namespace NetPorter
 		{
 			textBox1.Visible = radioButton2.Checked;
 			button2.Enabled = radioButton2.Checked;
+			button4.Enabled = radioButton2.Checked;
 			if (textBox1.Visible)
 			{
 				try
 				{
 					string filename = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DualServer.ini");
 					textBox1.Text = File.ReadAllText(filename);
+					textBox1.ClearUndo();
 				}
 				catch (Exception ex)
 				{
@@ -393,6 +420,12 @@ namespace NetPorter
 				dualserver = null;
 				StartDualServer();
 			}
+		}
+
+		private void button4_Click(object sender, EventArgs e)
+		{
+			button2_Click(sender, e);
+			button3_Click(sender, e);
 		}
 
 		private void textBox1_ContextMenuCommand(object sender, EventArgs e)

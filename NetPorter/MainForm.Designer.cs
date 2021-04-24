@@ -54,6 +54,7 @@ namespace NetPorter
 			this.button1 = new System.Windows.Forms.Button();
 			this.button2 = new System.Windows.Forms.Button();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
+			this.button4 = new System.Windows.Forms.Button();
 			this.button3 = new System.Windows.Forms.Button();
 			this.labelVersion = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.ListenPort)).BeginInit();
@@ -234,7 +235,7 @@ namespace NetPorter
 			this.label8.AutoSize = true;
 			this.label8.Location = new System.Drawing.Point(528, 27);
 			this.label8.Name = "label8";
-			this.label8.Size = new System.Drawing.Size(124, 13);
+			this.label8.Size = new System.Drawing.Size(170, 13);
 			this.label8.TabIndex = 5;
 			this.label8.Text = "© 2005-2021 Yves Goergen et al.";
 			this.label8.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -327,6 +328,7 @@ namespace NetPorter
 			this.textBox1.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("textBox1.ServiceColors")));
 			this.textBox1.Size = new System.Drawing.Size(702, 350);
 			this.textBox1.TabIndex = 10;
+			this.textBox1.TabStop = false;
 			this.textBox1.Visible = false;
 			this.textBox1.Zoom = 100;
 			// 
@@ -334,7 +336,7 @@ namespace NetPorter
 			// 
 			this.button1.Location = new System.Drawing.Point(98, 15);
 			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(60, 23);
+			this.button1.Size = new System.Drawing.Size(69, 23);
 			this.button1.TabIndex = 11;
 			this.button1.Text = "Refresh";
 			this.button1.UseVisualStyleBackColor = true;
@@ -345,7 +347,7 @@ namespace NetPorter
 			this.button2.Enabled = false;
 			this.button2.Location = new System.Drawing.Point(98, 44);
 			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(60, 23);
+			this.button2.Size = new System.Drawing.Size(69, 23);
 			this.button2.TabIndex = 12;
 			this.button2.Text = "Save";
 			this.button2.UseVisualStyleBackColor = true;
@@ -353,6 +355,7 @@ namespace NetPorter
 			// 
 			// groupBox2
 			// 
+			this.groupBox2.Controls.Add(this.button4);
 			this.groupBox2.Controls.Add(this.button3);
 			this.groupBox2.Controls.Add(this.button2);
 			this.groupBox2.Controls.Add(this.radioButton1);
@@ -360,16 +363,26 @@ namespace NetPorter
 			this.groupBox2.Controls.Add(this.radioButton2);
 			this.groupBox2.Location = new System.Drawing.Point(525, 65);
 			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(164, 102);
+			this.groupBox2.Size = new System.Drawing.Size(173, 102);
 			this.groupBox2.TabIndex = 13;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Dual Server";
+			// 
+			// button4
+			// 
+			this.button4.Location = new System.Drawing.Point(68, 73);
+			this.button4.Name = "button4";
+			this.button4.Size = new System.Drawing.Size(99, 23);
+			this.button4.TabIndex = 14;
+			this.button4.Text = "Save && Restart";
+			this.button4.UseVisualStyleBackColor = true;
+			this.button4.Click += new System.EventHandler(this.button4_Click);
 			// 
 			// button3
 			// 
 			this.button3.Location = new System.Drawing.Point(6, 73);
 			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(152, 23);
+			this.button3.Size = new System.Drawing.Size(56, 23);
 			this.button3.TabIndex = 13;
 			this.button3.Text = "Restart";
 			this.button3.UseVisualStyleBackColor = true;
@@ -446,6 +459,7 @@ namespace NetPorter
 		private System.Windows.Forms.GroupBox groupBox2;
 		private System.Windows.Forms.Button button3;
 		private System.Windows.Forms.Label labelVersion;
+		private System.Windows.Forms.Button button4;
 	}
 }
 
