@@ -1,6 +1,6 @@
 # NetPorter
 
-This fork of [NetPorter](https://unclassified.software/files/apps/netporter "") provides an integrated GUI to configure its native port forwarding feature, as well as configure and monitor DHCP and DNS through [Dual&nbsp;Server](https://github.com/datadiode/dualserver "").
+This fork of [NetPorter](https://unclassified.software/en/apps/netporter "") provides an integrated GUI to configure its native port forwarding feature, as well as configure and monitor DHCP and DNS through [Dual&nbsp;Server](https://github.com/datadiode/dualserver "").
 
 ![main-window-dualserver-offline.png](Screenshots/main-window-dualserver-offline.png "")  
 <sup>*Dual Server disabled*</sup>
