@@ -385,6 +385,8 @@ namespace NetPorter
 		{
 			webBrowser1.Visible = radioButton1.Checked;
 			button1.Enabled = radioButton1.Checked;
+			if (webBrowser1.Visible)
+				webBrowser1.Refresh();
 		}
 
 		private void radioButton2_CheckedChanged(object sender, EventArgs e)
