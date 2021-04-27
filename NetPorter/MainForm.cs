@@ -121,27 +121,35 @@ namespace NetPorter
 
 		private void MainForm_LocationChanged(object sender, EventArgs e)
 		{
-			var hwndConsole = WinApi.GetConsoleWindow();
 			if (WindowState == FormWindowState.Minimized)
 			{
 				NotifyIcon.Visible = true;
 				Visible = false;
-				WinApi.ShowWindow(hwndConsole, 0);
 				if (!displayedTrayNote)
 					NotifyIcon.ShowBalloonTip(5000);
 				displayedTrayNote = true;
 			}
+		}
+
+		private void MainForm_VisibleChanged(object sender, EventArgs e)
+		{
+			var hwndConsole = WinApi.GetConsoleWindow();
+			if (Visible)
+			{
+				NotifyIcon.Visible = false;
+				WinApi.ShowWindow(hwndConsole, 7);
+			}
 			else
 			{
-				WinApi.ShowWindow(hwndConsole, 7);
-				Visible = true;
-				NotifyIcon.Visible = false;
+				NotifyIcon.Visible = true;
+				WinApi.ShowWindow(hwndConsole, 0);
 			}
 		}
 
 		private void NotifyIcon_Click(object sender, EventArgs e)
 		{
 			Visible = true;
+			Activate();
 			WindowState = FormWindowState.Normal;
 		}
 

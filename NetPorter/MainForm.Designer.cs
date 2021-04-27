@@ -437,6 +437,7 @@ namespace NetPorter
 			this.Name = "MainForm";
 			this.Text = "NetPorter";
 			this.LocationChanged += new System.EventHandler(this.MainForm_LocationChanged);
+			this.VisibleChanged += new System.EventHandler(this.MainForm_VisibleChanged);
 			((System.ComponentModel.ISupportInitialize)(this.ListenPort)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.DestinationPort)).EndInit();
 			this.groupBox1.ResumeLayout(false);
