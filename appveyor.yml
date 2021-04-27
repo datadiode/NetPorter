@@ -7,13 +7,16 @@ configuration:
 
 platform: Any CPU
 
+environment:
+  DualServerTag: 7.11.16.datadiode.24.g6f008
+
 build_script:
 - msbuild /t:Restore,Rebuild /p:Platform="%PLATFORM%" /p:Configuration="%CONFIGURATION%" NetPorter.sln
 
 after_build:
 - ps: >-
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;
-    Invoke-WebRequest https://github.com/datadiode/dualserver/releases/download/7.11.16.datadiode.23.g7bc52/DualServer_7.11.16.datadiode.23.g7bc52-Win32-$env:CONFIGURATION.zip -Outfile DualServer.zip;
+    Invoke-WebRequest https://github.com/datadiode/dualserver/releases/download/$env:DualServerTag/DualServer_$env:DualServerTag-Win32-$env:CONFIGURATION.zip -Outfile DualServer.zip;
     7z.exe x "-oNetPorter\bin\$env:CONFIGURATION\net40\" DualServer.zip;
     Invoke-WebRequest https://scripttiger.github.io/dualserver/DualServerManual.pdf -Outfile "NetPorter\bin\$env:CONFIGURATION\net40\DualServerManual.pdf";
     copy LICENSE "NetPorter\bin\$env:CONFIGURATION\net40\";

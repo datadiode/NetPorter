@@ -56,6 +56,7 @@ namespace NetPorter
 				new MenuItem("ZONE_REPLICATION", textBox1_ContextMenuCommand),
 				new MenuItem("TIMINGS", textBox1_ContextMenuCommand),
 				new MenuItem("HTTP_INTERFACE", textBox1_ContextMenuCommand),
+				new MenuItem("TELNET_INTERFACE", textBox1_ContextMenuCommand),
 				new MenuItem("RANGE_SET", textBox1_ContextMenuCommand),
 				new MenuItem("GLOBAL_OPTIONS", textBox1_ContextMenuCommand),
 				});
