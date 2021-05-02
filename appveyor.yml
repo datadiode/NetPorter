@@ -8,7 +8,7 @@ configuration:
 platform: Any CPU
 
 environment:
-  DualServerTag: 7.11.16.datadiode.24.g6f008
+  DualServerTag: 7.11.16.datadiode.31.g6a51b
 
 build_script:
 - msbuild /t:Restore,Rebuild /p:Platform="%PLATFORM%" /p:Configuration="%CONFIGURATION%" NetPorter.sln
