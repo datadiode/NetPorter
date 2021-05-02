@@ -106,15 +106,10 @@ public abstract class Listener : IDisposable{
 	///<summary>Starts listening on the selected IP address and port.</summary>
 	///<exception cref="SocketException">There was an error while creating the listening socket.</exception>
 	public void Start() {
-		try {
-			ListenSocket = new Socket(Address.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-			ListenSocket.Bind(new IPEndPoint(Address, Port));
-			ListenSocket.Listen(50);
-			ListenSocket.BeginAccept(new AsyncCallback(this.OnAccept), ListenSocket);
-		} catch {
-			ListenSocket = null;
-			throw new SocketException();
-		}
+		ListenSocket = new Socket(Address.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+		ListenSocket.Bind(new IPEndPoint(Address, Port));
+		ListenSocket.Listen(50);
+		ListenSocket.BeginAccept(new AsyncCallback(this.OnAccept), ListenSocket);
 	}
 	///<summary>Restarts listening on the selected IP address and port.</summary>
 	///<remarks>This method is automatically called when the listening port or the listening IP address are changed.</remarks>
