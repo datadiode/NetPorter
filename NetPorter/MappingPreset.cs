@@ -13,6 +13,7 @@ namespace NetPorter
 		public string DestinationHost;
 		public int DestinationPort;
 		[NonSerialized()] public PortMapListener Listener;
+		[NonSerialized()] public Exception Reason;
 
 		public bool Enabled;
 

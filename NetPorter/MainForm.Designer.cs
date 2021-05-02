@@ -166,6 +166,8 @@ namespace NetPorter
 			this.MappingPresets.Size = new System.Drawing.Size(201, 109);
 			this.MappingPresets.TabIndex = 1;
 			this.MappingPresets.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.MappingPresets_ItemCheck);
+			this.MappingPresets.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MappingPresets_MouseMove);
+			this.MappingPresets.MouseLeave += new System.EventHandler(this.MappingPresets_MouseLeave);
 			this.MappingPresets.SelectedIndexChanged += new System.EventHandler(this.MappingPresets_SelectedIndexChanged);
 			// 
 			// AddPreset

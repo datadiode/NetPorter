@@ -30,6 +30,8 @@ namespace NetPorter
 		readonly Regex ExcludeRegex = new Regex("\\;.*$", RegexOptions.Multiline);
 		readonly Regex SectionRegex = new Regex("^\\[.*\\]", RegexOptions.Multiline);
 
+		private ToolTip toolTip = new ToolTip();
+
 		public MainForm()
 		{
 			InitializeComponent();
@@ -215,6 +217,7 @@ namespace NetPorter
 				catch (Exception ex)
 				{
 					e.NewValue = CheckState.Indeterminate;
+					preset.Reason = ex;
 				}
 				finally
 				{
@@ -239,6 +242,33 @@ namespace NetPorter
 				}
 			}
 			SaveConfig();
+		}
+
+		private void MappingPresets_MouseMove(object sender, MouseEventArgs e)
+		{
+			var index = MappingPresets.IndexFromPoint(e.Location);
+			var tag = index != -1 &&
+				MappingPresets.GetItemCheckState(index) == CheckState.Indeterminate ?
+				MappingPresets.Items[index] : null;
+			if (toolTip.Tag != tag)
+			{
+				if (tag is MappingPreset preset)
+				{
+					var rect = MappingPresets.GetItemRectangle(index);
+					toolTip.Show(preset.Reason.ToString(), MappingPresets, rect.Left + 20, rect.Bottom + 10);
+				}
+				else
+				{
+					toolTip.Hide(MappingPresets);
+				}
+				toolTip.Tag = tag;
+			}
+		}
+
+		private void MappingPresets_MouseLeave(object sender, EventArgs e)
+		{
+			toolTip.Hide(MappingPresets);
+			toolTip.Tag = null;
 		}
 
 		private void PresetName_TextChanged(object sender, EventArgs e)
