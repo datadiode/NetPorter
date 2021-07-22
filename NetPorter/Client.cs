@@ -198,9 +198,9 @@ public abstract class Client : IDisposable {
 	/// <summary>Holds the value of the DestinationSocket property.</summary>
 	private Socket m_DestinationSocket;
 	/// <summary>Holds the value of the Buffer property.</summary>
-	private byte[] m_Buffer = new byte[4096]; //0<->4095 = 4096
+	private byte[] m_Buffer = new byte[0x10000]; //0<->0xFFFF = 0x10000
 	/// <summary>Holds the value of the RemoteBuffer property.</summary>
-	private byte[] m_RemoteBuffer = new byte[1024];
+	private byte[] m_RemoteBuffer = new byte[0x10000];
 }
 
 }
