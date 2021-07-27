@@ -58,6 +58,7 @@ namespace NetPorter
 			this.button4 = new System.Windows.Forms.Button();
 			this.button3 = new System.Windows.Forms.Button();
 			this.HomepageLinklabel = new System.Windows.Forms.LinkLabel();
+			this.Reverse = new System.Windows.Forms.CheckBox();
 			((System.ComponentModel.ISupportInitialize)(this.ListenPort)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.DestinationPort)).BeginInit();
 			this.groupBox1.SuspendLayout();
@@ -232,6 +233,7 @@ namespace NetPorter
 			// 
 			// groupBox1
 			// 
+			this.groupBox1.Controls.Add(this.Reverse);
 			this.groupBox1.Controls.Add(this.label6);
 			this.groupBox1.Controls.Add(this.label3);
 			this.groupBox1.Controls.Add(this.ListenPort);
@@ -418,6 +420,17 @@ namespace NetPorter
 			this.HomepageLinklabel.Text = "v";
 			this.HomepageLinklabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.HomepageLinklabel_LinkClicked);
 			// 
+			// Reverse
+			// 
+			this.Reverse.AutoSize = true;
+			this.Reverse.Location = new System.Drawing.Point(194, 100);
+			this.Reverse.Name = "Reverse";
+			this.Reverse.Size = new System.Drawing.Size(66, 17);
+			this.Reverse.TabIndex = 9;
+			this.Reverse.Text = "Re&verse";
+			this.Reverse.UseVisualStyleBackColor = true;
+			this.Reverse.CheckedChanged += new System.EventHandler(this.Reverse_CheckedChanged);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -482,6 +495,7 @@ namespace NetPorter
 		private System.Windows.Forms.LinkLabel DualServerManualLinklabel;
 		private System.Windows.Forms.Button button4;
 		private System.Windows.Forms.CheckBox checkBox1;
+		private System.Windows.Forms.CheckBox Reverse;
 	}
 }
 

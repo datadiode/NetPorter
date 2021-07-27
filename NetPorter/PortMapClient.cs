@@ -41,28 +41,33 @@ public sealed class PortMapClient : Client {
 	///<param name="ClientSocket">The <see cref ="Socket">Socket</see> connection between this proxy server and the local client.</param>
 	///<param name="Destroyer">The callback method to be called when this Client object disconnects from the local client and the remote server.</param>
 	///<param name="MapTo">The IP EndPoint to send the incoming data to.</param>
-	public PortMapClient(Socket ClientSocket, DestroyDelegate Destroyer, IPEndPoint MapTo) : base(ClientSocket, Destroyer) {
-		this.MapTo = MapTo;
-	}
-	///<summary>Gets or sets the IP EndPoint to map all incoming traffic to.</summary>
-	///<value>An IPEndPoint that holds the IP address and port to use when redirecting incoming traffic.</value>
-	///<exception cref="ArgumentNullException">The specified value is null.</exception>
-	///<returns>An IP EndPoint specifying the host and port to map all incoming traffic to.</returns>
-	private IPEndPoint MapTo {
-		get {
-			return m_MapTo;
-		}
-		set {
-			if (value == null)
-				throw new ArgumentNullException();
-			m_MapTo = value;
-		}
+	///<param name="Reverse">Whether to expect a reverse connection.</param>
+	public PortMapClient(Socket ClientSocket, DestroyDelegate Destroyer, IPEndPoint MapTo, bool Reverse) : base(ClientSocket, Destroyer) {
+		this.MapTo = MapTo ?? throw new ArgumentNullException();
+		this.Reverse = Reverse;
 	}
 	///<summary>Starts connecting to the remote host.</summary>
 	override public void StartHandshake() {
 		try {
 			DestinationSocket = new Socket(MapTo.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-			DestinationSocket.BeginConnect(MapTo, new AsyncCallback(this.OnConnected), DestinationSocket);
+			if (Reverse) {
+				DestinationSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, 1);
+				DestinationSocket.Bind(new IPEndPoint(MapTo.Address, MapTo.Port));
+				DestinationSocket.Listen(50);
+				DestinationSocket.BeginAccept(new AsyncCallback(this.OnAccepted), DestinationSocket);
+			} else {
+				DestinationSocket.BeginConnect(MapTo, new AsyncCallback(this.OnConnected), DestinationSocket);
+			}
+		} catch {
+			Dispose();
+		}
+	}
+	private void OnAccepted(IAsyncResult ar) {
+		try {
+			var socket = DestinationSocket.EndAccept(ar);
+			DestinationSocket.Dispose();
+			DestinationSocket = socket;
+			StartRelay();
 		} catch {
 			Dispose();
 		}
@@ -89,7 +94,8 @@ public sealed class PortMapClient : Client {
 	}
 	// private variables
 	/// <summary>Holds the value of the MapTo property.</summary>
-	private IPEndPoint m_MapTo;
+	private readonly IPEndPoint MapTo;
+	private readonly bool Reverse;
 }
 
 }

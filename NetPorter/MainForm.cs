@@ -178,11 +178,13 @@ namespace NetPorter
 				{
 					DestinationPort.Value = 1;
 				}
+				Reverse.Checked = preset.Reverse;
 
 				PresetName.Enabled = true;
 				ListenPort.Enabled = true;
 				DestinationHost.Enabled = true;
 				DestinationPort.Enabled = true;
+				Reverse.Enabled = true;
 
 				RemovePreset.Enabled = true;
 			}
@@ -192,11 +194,13 @@ namespace NetPorter
 				ListenPort.Value = 1;
 				DestinationHost.Text = "";
 				DestinationPort.Value = 1;
+				Reverse.Checked = false;
 
 				PresetName.Enabled = false;
 				ListenPort.Enabled = false;
 				DestinationHost.Enabled = false;
 				DestinationPort.Enabled = false;
+				Reverse.Enabled = false;
 
 				RemovePreset.Enabled = false;
 			}
@@ -304,6 +308,14 @@ namespace NetPorter
 			SaveConfig();
 		}
 
+		private void Reverse_CheckedChanged(object sender, EventArgs e)
+		{
+			MappingPreset preset = MappingPresets.SelectedItem as MappingPreset;
+			if (preset == null) return;
+			preset.Reverse = Reverse.Checked;
+			SaveConfig();
+		}
+
 		private void AddPreset_Click(object sender, EventArgs e)
 		{
 			MappingPreset preset = new MappingPreset();
@@ -337,7 +349,8 @@ namespace NetPorter
 			}
 			preset.Listener = new PortMapListener(IPAddress.Any,
 				preset.ListenPort,
-				new IPEndPoint(address, preset.DestinationPort));
+				new IPEndPoint(address, preset.DestinationPort),
+				preset.Reverse);
 			preset.Listener.Start();
 		}
 
