@@ -248,7 +248,7 @@ public abstract class Listener : IDisposable{
 	/// <summary>Holds the value of the ListenSocket property.</summary>
 	private Socket m_ListenSocket;
 	/// <summary>Holds the value of the Clients property.</summary>
-	private ArrayList m_Clients = new ArrayList();
+	private readonly ArrayList m_Clients = ArrayList.Synchronized(new ArrayList());
 	/// <summary>Holds the value of the IsDisposed property.</summary>
 	private bool m_IsDisposed = false;
 }
