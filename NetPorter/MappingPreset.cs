@@ -12,8 +12,11 @@ namespace NetPorter
 		public int ListenPort;
 		public string DestinationHost;
 		public int DestinationPort;
+		public bool IPv4 = true;
+		public bool IPv6 = false;
 		public bool Reverse;
 		[NonSerialized()] public PortMapListener Listener;
+		[NonSerialized()] public PortMapListener IPv6Listener;
 		[NonSerialized()] public Exception Reason;
 
 		public bool Enabled;

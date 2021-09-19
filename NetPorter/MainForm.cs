@@ -178,12 +178,16 @@ namespace NetPorter
 				{
 					DestinationPort.Value = 1;
 				}
+				IPv4.Checked = preset.IPv4;
+				IPv6.Checked = preset.IPv6;
 				Reverse.Checked = preset.Reverse;
 
 				PresetName.Enabled = true;
 				ListenPort.Enabled = true;
 				DestinationHost.Enabled = true;
 				DestinationPort.Enabled = true;
+				IPv4.Enabled = true;
+				IPv6.Enabled = true;
 				Reverse.Enabled = true;
 
 				RemovePreset.Enabled = true;
@@ -194,12 +198,16 @@ namespace NetPorter
 				ListenPort.Value = 1;
 				DestinationHost.Text = "";
 				DestinationPort.Value = 1;
+				IPv4.Checked = false;
+				IPv6.Checked = false;
 				Reverse.Checked = false;
 
 				PresetName.Enabled = false;
 				ListenPort.Enabled = false;
 				DestinationHost.Enabled = false;
 				DestinationPort.Enabled = false;
+				IPv4.Enabled = false;
+				IPv6.Enabled = false;
 				Reverse.Enabled = false;
 
 				RemovePreset.Enabled = false;
@@ -308,6 +316,22 @@ namespace NetPorter
 			SaveConfig();
 		}
 
+		private void IPv4_CheckedChanged(object sender, EventArgs e)
+		{
+			MappingPreset preset = MappingPresets.SelectedItem as MappingPreset;
+			if (preset == null) return;
+			preset.IPv4 = IPv4.Checked;
+			SaveConfig();
+		}
+
+		private void IPv6_CheckedChanged(object sender, EventArgs e)
+		{
+			MappingPreset preset = MappingPresets.SelectedItem as MappingPreset;
+			if (preset == null) return;
+			preset.IPv6 = IPv6.Checked;
+			SaveConfig();
+		}
+
 		private void Reverse_CheckedChanged(object sender, EventArgs e)
 		{
 			MappingPreset preset = MappingPresets.SelectedItem as MappingPreset;
@@ -347,11 +371,22 @@ namespace NetPorter
 				var hostent = Dns.GetHostEntry(preset.DestinationHost);
 				address = hostent.AddressList[0];
 			}
-			preset.Listener = new PortMapListener(IPAddress.Any,
-				preset.ListenPort,
-				new IPEndPoint(address, preset.DestinationPort),
-				preset.Reverse);
-			preset.Listener.Start();
+			if (preset.IPv4)
+			{
+				preset.Listener = new PortMapListener(IPAddress.Any,
+					preset.ListenPort,
+					new IPEndPoint(address, preset.DestinationPort),
+					preset.Reverse);
+				preset.Listener.Start();
+			}
+			if (preset.IPv6)
+			{
+				preset.IPv6Listener = new PortMapListener(IPAddress.IPv6Any,
+					preset.ListenPort,
+					new IPEndPoint(address, preset.DestinationPort),
+					preset.Reverse);
+				preset.IPv6Listener.Start();
+			}
 		}
 
 		private void EndPortmap(MappingPreset preset)
@@ -361,6 +396,11 @@ namespace NetPorter
 			{
 				preset.Listener.Dispose();
 				preset.Listener = null;
+			}
+			if (preset.IPv6Listener != null)
+			{
+				preset.IPv6Listener.Dispose();
+				preset.IPv6Listener = null;
 			}
 		}
 

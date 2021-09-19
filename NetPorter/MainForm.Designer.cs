@@ -59,6 +59,8 @@ namespace NetPorter
 			this.button3 = new System.Windows.Forms.Button();
 			this.HomepageLinklabel = new System.Windows.Forms.LinkLabel();
 			this.Reverse = new System.Windows.Forms.CheckBox();
+			this.IPv4 = new System.Windows.Forms.CheckBox();
+			this.IPv6 = new System.Windows.Forms.CheckBox();
 			((System.ComponentModel.ISupportInitialize)(this.ListenPort)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.DestinationPort)).BeginInit();
 			this.groupBox1.SuspendLayout();
@@ -114,7 +116,7 @@ namespace NetPorter
 			this.label4.Location = new System.Drawing.Point(6, 74);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(89, 13);
-			this.label4.TabIndex = 4;
+			this.label4.TabIndex = 6;
 			this.label4.Text = "Destination &host:";
 			// 
 			// DestinationHost
@@ -123,7 +125,7 @@ namespace NetPorter
 			this.DestinationHost.Location = new System.Drawing.Point(101, 71);
 			this.DestinationHost.Name = "DestinationHost";
 			this.DestinationHost.Size = new System.Drawing.Size(190, 20);
-			this.DestinationHost.TabIndex = 5;
+			this.DestinationHost.TabIndex = 7;
 			this.DestinationHost.TextChanged += new System.EventHandler(this.DestinationHost_TextChanged);
 			// 
 			// label5
@@ -132,7 +134,7 @@ namespace NetPorter
 			this.label5.Location = new System.Drawing.Point(6, 100);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(88, 13);
-			this.label5.TabIndex = 6;
+			this.label5.TabIndex = 8;
 			this.label5.Text = "&Destination port:";
 			// 
 			// DestinationPort
@@ -151,7 +153,7 @@ namespace NetPorter
 			0});
 			this.DestinationPort.Name = "DestinationPort";
 			this.DestinationPort.Size = new System.Drawing.Size(71, 20);
-			this.DestinationPort.TabIndex = 7;
+			this.DestinationPort.TabIndex = 9;
 			this.DestinationPort.Value = new decimal(new int[] {
 			1,
 			0,
@@ -218,7 +220,7 @@ namespace NetPorter
 			this.label7.Margin = new System.Windows.Forms.Padding(3, 8, 3, 0);
 			this.label7.Name = "label7";
 			this.label7.Size = new System.Drawing.Size(279, 13);
-			this.label7.TabIndex = 8;
+			this.label7.TabIndex = 11;
 			this.label7.Text = "Check the preset in the list to activate the port mapping.";
 			// 
 			// label8
@@ -233,6 +235,8 @@ namespace NetPorter
 			// 
 			// groupBox1
 			// 
+			this.groupBox1.Controls.Add(this.IPv6);
+			this.groupBox1.Controls.Add(this.IPv4);
 			this.groupBox1.Controls.Add(this.Reverse);
 			this.groupBox1.Controls.Add(this.label6);
 			this.groupBox1.Controls.Add(this.label3);
@@ -362,7 +366,7 @@ namespace NetPorter
 			this.groupBox2.Location = new System.Drawing.Point(522, 56);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(173, 109);
-			this.groupBox2.TabIndex = 8;
+			this.groupBox2.TabIndex = 7;
 			this.groupBox2.TabStop = false;
 			// 
 			// DualServerManualLinklabel
@@ -423,13 +427,35 @@ namespace NetPorter
 			// Reverse
 			// 
 			this.Reverse.AutoSize = true;
-			this.Reverse.Location = new System.Drawing.Point(194, 100);
+			this.Reverse.Location = new System.Drawing.Point(185, 100);
 			this.Reverse.Name = "Reverse";
 			this.Reverse.Size = new System.Drawing.Size(66, 17);
-			this.Reverse.TabIndex = 9;
+			this.Reverse.TabIndex = 10;
 			this.Reverse.Text = "Re&verse";
 			this.Reverse.UseVisualStyleBackColor = true;
 			this.Reverse.CheckedChanged += new System.EventHandler(this.Reverse_CheckedChanged);
+			// 
+			// IPv4
+			// 
+			this.IPv4.AutoSize = true;
+			this.IPv4.Location = new System.Drawing.Point(185, 47);
+			this.IPv4.Name = "IPv4";
+			this.IPv4.Size = new System.Drawing.Size(48, 17);
+			this.IPv4.TabIndex = 4;
+			this.IPv4.Text = "IPv&4";
+			this.IPv4.UseVisualStyleBackColor = true;
+			this.IPv4.CheckedChanged += new System.EventHandler(this.IPv4_CheckedChanged);
+			// 
+			// IPv6
+			// 
+			this.IPv6.AutoSize = true;
+			this.IPv6.Location = new System.Drawing.Point(239, 47);
+			this.IPv6.Name = "IPv6";
+			this.IPv6.Size = new System.Drawing.Size(48, 17);
+			this.IPv6.TabIndex = 5;
+			this.IPv6.Text = "IPv&6";
+			this.IPv6.UseVisualStyleBackColor = true;
+			this.IPv6.CheckedChanged += new System.EventHandler(this.IPv6_CheckedChanged);
 			// 
 			// MainForm
 			// 
@@ -496,6 +522,8 @@ namespace NetPorter
 		private System.Windows.Forms.Button button4;
 		private System.Windows.Forms.CheckBox checkBox1;
 		private System.Windows.Forms.CheckBox Reverse;
+		private System.Windows.Forms.CheckBox IPv4;
+		private System.Windows.Forms.CheckBox IPv6;
 	}
 }
 
