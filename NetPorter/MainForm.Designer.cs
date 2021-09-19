@@ -426,6 +426,7 @@ namespace NetPorter
 			// 
 			// Reverse
 			// 
+			this.Reverse.Enabled = false;
 			this.Reverse.AutoSize = true;
 			this.Reverse.Location = new System.Drawing.Point(185, 100);
 			this.Reverse.Name = "Reverse";
@@ -437,6 +438,7 @@ namespace NetPorter
 			// 
 			// IPv4
 			// 
+			this.IPv4.Enabled = false;
 			this.IPv4.AutoSize = true;
 			this.IPv4.Location = new System.Drawing.Point(185, 47);
 			this.IPv4.Name = "IPv4";
@@ -448,6 +450,7 @@ namespace NetPorter
 			// 
 			// IPv6
 			// 
+			this.IPv6.Enabled = false;
 			this.IPv6.AutoSize = true;
 			this.IPv6.Location = new System.Drawing.Point(239, 47);
 			this.IPv6.Name = "IPv6";
